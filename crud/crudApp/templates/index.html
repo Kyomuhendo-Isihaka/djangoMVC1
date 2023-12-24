@@ -1,0 +1,60 @@
+{% extends 'layout.html'%}
+
+{%block content%}
+
+<div class="container p-3">
+    <div class="row">
+        <div class="col-md-3">
+            <h4 class="text-center">Add Student</h4>
+            <form method="post" action="{% url 'home' %}" class="form-group">
+                {% csrf_token %}
+
+                <label for="id_stdName">Name:</label>
+                <input type="text" name="stdName" id="id_stdName" class="form-control">
+                <br>
+
+                <label for="id_stdAge">Age:</label>
+                <input type="text" name="stdAge" id="id_stdAge" class="form-control">
+                <br>
+
+                <label for="id_stdCourse">Course:</label>
+                <input type="text" name="stdCourse" id="id_stdCourse" class="form-control">
+                <br>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+
+        </div>
+        <div class="col-md-9">
+            <h4 class="text-center">Students</h4>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Age</th>
+                        <th>Course</th>
+                        <th>Action</th>
+                    </tr>
+                <tbody>
+                    {%for std in students %}
+                    <tr>
+                        <td>{{std.stdName}}</td>
+                        <td>{{std.stdAge}}</td>
+                        <td>{{std.stdCourse}}</td>
+                        <td>
+                            <a href="{% url 'student_edit' pk=std.id %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'student_delete' pk=std.id %} "
+                                onclick="return confirm('Are you sure you want to delete {{ std.stdName }}?')"
+                                class="btn btn-danger">Delete</a>
+
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+</div>
+{%endblock%}

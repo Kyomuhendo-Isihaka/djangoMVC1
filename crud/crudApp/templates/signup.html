@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="w-75 mx-auto">
+        <h2 class="text-center">Create Account</h2>
+        <form method="post" action="{% url 'account_signup' %}" class="form-group">
+            {% csrf_token %}
+
+            <label for="id_username">Username:</label>
+            <input type="text" name="username" id="id_username" required class="form-control my-1">
+
+            <label for="id_email">Email:</label>
+            <input type="email" name="email" id="id_email" required class="form-control my-1">
+
+            <label for="id_date">Date of Birth:</label>
+            <input type="date" name="date" id="id_date" required class="form-control my-1">
+
+            <label for="id_password">Password:</label>
+            <input type="password" name="password" id="id_password" required class="form-control my-1">
+
+            <button class="btn btn-primary" type="submit">Register</button>
+        </form>
+        <a href="{%url 'account_login'%}" class="text-center nav-link">Already Have an account? Login</a>
+    </div>
+</div>
+
+{% endblock %}
